@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592719490219",
+    "project_id": "familyincome-e173c",
+    "storage_bucket": "familyincome-e173c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592719490219:android:46cecbf9333ff0fec41bee",
+        "android_client_info": {
+          "package_name": "com.familyincome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiMMtqkbDIajanV8BKKiRemyHiI-8zMwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
