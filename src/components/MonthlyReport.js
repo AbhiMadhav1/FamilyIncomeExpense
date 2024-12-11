@@ -383,7 +383,6 @@ const MonthlyReport = ({userId}) => {
             </Text>
           </View>
 
-          {/* Sort dates in ascending order numerically */}
           {allDates
             .sort((a, b) => parseInt(a) - parseInt(b)) // Sort by numeric day
             .map(date => {
