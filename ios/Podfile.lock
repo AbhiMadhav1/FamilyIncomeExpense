@@ -3072,7 +3072,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNSVG (15.9.0):
+  - RNSVG (15.10.1):
     - React-Core
   - RNVectorIcons (10.2.0):
     - DoubleConversion
@@ -3493,7 +3493,7 @@ SPEC CHECKSUMS:
   RNGoogleSignin: 9e68b9bcc3888219357924e32ee563624745647d
   RNReanimated: 131b50b14a60d02cd023c42c9a8fc486deeaf6d5
   RNScreens: de55b9d7de8a017d1588dcb70415492d0b0597c2
-  RNSVG: 3d2bdcaef51c8071880a9c0072fe324f4423a3ba
+  RNSVG: 7ff26379b2d1871b8571e6f9bc9630de6baf9bdf
   RNVectorIcons: 7b81882e9c9369031aede0016dee0fe415cf2f43
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: c8810b40c43fa71cc1492f358ad5cd5fc1b505da

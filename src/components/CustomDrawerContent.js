@@ -721,7 +721,6 @@ const CustomDrawerContent = props => {
           <Icon name="log-out" size={24} color="#333" />
           <Text style={styles.drawerText}>Logout</Text>
         </TouchableOpacity>
-
         <Modal
           animationType="slide"
           transparent={true}
@@ -772,6 +771,15 @@ const CustomDrawerContent = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  firstBackground: {
+    flex: 1,
+    resizeMode: 'cover', // Ensures the image covers the entire background
+  },
+  secondBackground: {
+    flex: 1,
+    resizeMode: 'cover', // Ensures the second image overlays correctly
+    opacity: 0.8, // Slight transparency for the second image
   },
   initialsContainer: {
     width: width * 0.25,

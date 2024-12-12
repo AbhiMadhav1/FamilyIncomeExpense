@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   noEntriesMessage: {
     padding: width * 0.05,
     textAlign: 'center',
-    color: '#333',
+    color: '#999',
     fontStyle: 'italic',
     fontWeight: 'bold',
     fontSize: width * 0.04,

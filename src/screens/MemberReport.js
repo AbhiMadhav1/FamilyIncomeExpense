@@ -278,45 +278,67 @@ const MemberReport = ({route}) => {
                   </Text>
                   {incomeEntries.map(entry => (
                     <View key={entry.id} style={styles.entryContainer}>
-                      <Text style={styles.detailText}>
-                        ₹ {entry.amount} - {entry.source} {entry.description}
-                      </Text>
-                      <Text style={styles.dateText}>
-                        Date: {formatDate(entry.date)}
-                      </Text>
-                      {entry.incomeImage && (
-                        <TouchableOpacity
-                          onPress={() => handleImagePress(entry.incomeImage)}>
-                          <Image
-                            source={{uri: entry.incomeImage}}
-                            style={styles.image}
-                            resizeMode="contain"
-                          />
-                        </TouchableOpacity>
+                      <View style={{flex: 1}}>
+                        <Text style={styles.detailText}>
+                          ₹ {entry.amount} - {entry.source} {entry.description}
+                        </Text>
+                      </View>
+                      {entry.incomeImage ? (
+                        <View style={{alignItems: 'center'}}>
+                          {/* TouchableOpacity only wraps the image */}
+                          <TouchableOpacity
+                            onPress={() => handleImagePress(entry.incomeImage)}>
+                            <Image
+                              source={{uri: entry.incomeImage}}
+                              style={styles.image}
+                              resizeMode="contain"
+                            />
+                          </TouchableOpacity>
+                          {/* Date is separate and non-clickable */}
+                          <Text style={styles.dateText}>
+                            Date: {formatDate(entry.date)}
+                          </Text>
+                        </View>
+                      ) : (
+                        // Show date on the right side when there is no image
+                        <Text style={[styles.dateText, styles.dateRight]}>
+                          Date: {formatDate(entry.date)}
+                        </Text>
                       )}
                     </View>
                   ))}
-                  <Text style={styles.detailTitle}>
-                    Expense (Debit): {monthlyExpense}
-                  </Text>
+
                   {expenseEntries.map(entry => (
                     <View key={entry.id} style={styles.entryContainer}>
-                      <Text style={styles.detailText}>
-                        ₹ {entry.amount} - {entry.expenseCategory}{' '}
-                        {entry.description}
-                      </Text>
-                      <Text style={styles.dateText}>
-                        Date: {formatDate(entry.date)}
-                      </Text>
-                      {entry.expenseImage && (
-                        <TouchableOpacity
-                          onPress={() => handleImagePress(entry.expenseImage)}>
-                          <Image
-                            source={{uri: entry.expenseImage}}
-                            style={styles.image}
-                            resizeMode="contain"
-                          />
-                        </TouchableOpacity>
+                      <View style={{flex: 1}}>
+                        <Text style={styles.detailText}>
+                          ₹ {entry.amount} - {entry.expenseCategory}{' '}
+                          {entry.description}
+                        </Text>
+                      </View>
+                      {entry.expenseImage ? (
+                        <View style={{alignItems: 'center'}}>
+                          {/* TouchableOpacity only wraps the image */}
+                          <TouchableOpacity
+                            onPress={() =>
+                              handleImagePress(entry.expenseImage)
+                            }>
+                            <Image
+                              source={{uri: entry.expenseImage}}
+                              style={styles.image}
+                              resizeMode="contain"
+                            />
+                          </TouchableOpacity>
+                          {/* Date is separate and non-clickable */}
+                          <Text style={styles.dateText}>
+                            Date: {formatDate(entry.date)}
+                          </Text>
+                        </View>
+                      ) : (
+                        // Show date on the right side when there is no image
+                        <Text style={[styles.dateText, styles.dateRight]}>
+                          Date: {formatDate(entry.date)}
+                        </Text>
                       )}
                     </View>
                   ))}
@@ -649,9 +671,12 @@ const styles = StyleSheet.create({
     color: '#444',
   },
   image: {
-    width: scale(50),
-    height: scale(50),
-    marginLeft: scale(10),
+    width: width * 0.08,
+    height: width * 0.08,
+    marginTop: 0,
+    borderRadius: width * 0.02,
+    borderColor: '#ddd',
+    borderWidth: 1,
   },
   balance: {
     fontWeight: 'bold',
@@ -666,6 +691,11 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(5),
     fontStyle: 'italic',
     fontWeight: 'bold',
+  },
+  dateRight: {
+    alignSelf: 'flex-end',
+    textAlign: 'right',
+    marginTop: 0,
   },
   modalContainer: {
     flex: 1,

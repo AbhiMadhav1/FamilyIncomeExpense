@@ -65,7 +65,6 @@ const AboutScreen = ({navigation}) => {
                 income, expenses, and trends.
               </Text>
             </View>
-
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Why Choose Us?</Text>
               <Text style={styles.note}>
