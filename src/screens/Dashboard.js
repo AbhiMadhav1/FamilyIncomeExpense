@@ -547,7 +547,11 @@ const Dashboard = ({navigation}) => {
                   placeholder="Amount"
                   keyboardType="numeric"
                   value={amount}
-                  onChangeText={setAmount}
+                  onChangeText={text => {
+                    if (text.length <= 10 && /^\d*$/.test(text)) {
+                      setAmount(text);
+                    }
+                  }}
                   placeholderTextColor="#aaa"
                   returnKeyType="next"
                   onFocus={() => handleFocus('amount')}

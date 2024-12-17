@@ -307,7 +307,9 @@ const MemberReport = ({route}) => {
                       )}
                     </View>
                   ))}
-
+                  <Text style={styles.detailTitle}>
+                    Expense (Credit): {monthlyIncome}
+                  </Text>
                   {expenseEntries.map(entry => (
                     <View key={entry.id} style={styles.entryContainer}>
                       <View style={{flex: 1}}>
