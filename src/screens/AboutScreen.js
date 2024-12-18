@@ -36,7 +36,6 @@ const AboutScreen = ({navigation}) => {
               finances, we make it simple and stress-free. Let's take control of
               your finances together!
             </Text>
-
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Features at a Glance:</Text>
               <Text style={styles.feature}>

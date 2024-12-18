@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import MonthPicker from 'react-native-month-year-picker';
 
-const MonthlyHeader = ({ balance }) => {
+const MonthlyHeader = ({balance}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [hasNavigated, setHasNavigated] = useState(false);
 
-  const getFormattedDate = (date) => {
-    const month = date.toLocaleString('default', { month: 'long' });
+  const getFormattedDate = date => {
+    const month = date.toLocaleString('default', {month: 'long'});
     const year = date.getFullYear();
-    return { month, year };
+    return {month, year};
   };
 
-  const { month, year } = getFormattedDate(currentDate);
+  const {month, year} = getFormattedDate(currentDate);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -25,7 +25,7 @@ const MonthlyHeader = ({ balance }) => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = (date) => {
+  const handleConfirm = date => {
     setCurrentDate(date);
     setHasNavigated(false);
     hideDatePicker();
@@ -64,16 +64,20 @@ const MonthlyHeader = ({ balance }) => {
   };
 
   return (
-    <LinearGradient
-      colors={['#00796b', '#20b2aa']}
-      style={styles.header}>
+    <LinearGradient colors={['#00796b', '#20b2aa']} style={styles.header}>
       <TouchableOpacity style={styles.backButton} onPress={goToPreviousDate}>
         <Icon name="chevron-back" size={25} color="#fff" />
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.dateSection} onPress={showDatePicker}>
-        <View style={[styles.dateBox, isThisMonth() ? styles.defaultBorder : styles.noBorder]}>
-          <Text style={styles.monthText}>{month} {year}</Text>
+        <View
+          style={[
+            styles.dateBox,
+            isThisMonth() ? styles.defaultBorder : styles.noBorder,
+          ]}>
+          <Text style={styles.monthText}>
+            {month} {year}
+          </Text>
         </View>
       </TouchableOpacity>
 
@@ -85,7 +89,7 @@ const MonthlyHeader = ({ balance }) => {
 
       {isDatePickerVisible && (
         <MonthPicker
-          value={currentDate}  // Pass the value prop correctly
+          value={currentDate} // Pass the value prop correctly
           onMonthYearChange={handleConfirm}
           onCancel={hideDatePicker}
         />
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     margin: 0,
     elevation: 3,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.3,
     shadowRadius: 3,
   },

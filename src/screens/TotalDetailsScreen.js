@@ -15,6 +15,7 @@ import CustomStatusBar from '../components/CustomStatusBar';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MonthPicker from 'react-native-month-year-picker';
+import {PieChart} from 'react-native-chart-kit';
 
 const {width, height} = Dimensions.get('window');
 
@@ -257,13 +258,13 @@ const TotalDetailsScreen = ({route, navigation}) => {
           ) : (
             validMembers.map((member, index) => (
               <View key={index} style={styles.member}>
-                {/* Conditional rendering for Avatar or Initials */}
+                {/* Avatar and Name */}
                 <View style={styles.avatarContainer}>
                   {member.memberAvatar ? (
                     <Image
                       source={{
                         uri: `data:image/jpeg;base64,${member.memberAvatar}`,
-                      }} // Using base64 string
+                      }}
                       style={styles.avatarImage}
                     />
                   ) : (
@@ -283,6 +284,42 @@ const TotalDetailsScreen = ({route, navigation}) => {
                     {member.memberName === currentUserName ? '(you)' : ''}
                   </Text>
                 </View>
+                <View style={{flex: 1}}>
+                  <PieChart
+                    data={[
+                      {
+                        name: 'Income',
+                        population: member.memberIncome,
+                        color: '#28a745',
+                        legendFontColor: '#000',
+                        legendFontSize: 12,
+                      },
+                      {
+                        name: 'Expense',
+                        population: member.memberExpense,
+                        color: '#dc3545',
+                        legendFontColor: '#000',
+                        legendFontSize: 12,
+                      },
+                    ]}
+                    width={Dimensions.get('window').width - 30}
+                    height={100}
+                    chartConfig={{
+                      backgroundColor: 'transparent',
+                      color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                      style: {
+                        borderRadius: 16,
+                      },
+                    }}
+                    accessor="population"
+                    backgroundColor="transparent"
+                    style={{
+                      marginVertical: 8,
+                      borderRadius: 16,
+                    }}
+                  />
+                </View>
+                {/* Income and Expense Summary */}
                 <Text style={styles.memberIncome}>
                   Income: {formatAmount(member.memberIncome)}
                 </Text>

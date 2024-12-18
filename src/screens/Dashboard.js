@@ -391,7 +391,6 @@ const Dashboard = ({navigation}) => {
           reader.onloadend = resolve;
         });
       }
-
       if (type === 'income') {
         if (isEditing) {
           await firestore()
@@ -411,7 +410,6 @@ const Dashboard = ({navigation}) => {
           await firestore().collection('expenseEntries').add(data);
         }
       }
-
       resetInputs();
       setSelectedImage();
       setBase64Image();
@@ -435,6 +433,7 @@ const Dashboard = ({navigation}) => {
               selectedDate={selectedDate}
             />
             <View style={styles.totalIncomeContainer}>
+              {/* <Image style={{height: 35, width: 35}} source={require('../assets/icons/income.png')}/> */}
               <Text style={styles.title}>Total Income (Credit):</Text>
               <Text style={styles.totalAmount}>₹ {calculateTotalIncome()}</Text>
             </View>
@@ -443,6 +442,7 @@ const Dashboard = ({navigation}) => {
               handleLongPress={handleLongPress}
             />
             <View style={styles.totalIncomeContainer}>
+              {/* <Image style={{height: 35, width: 35}} source={require('../assets/icons/expense.png')}/> */}
               <Text style={styles.title}>Total Expense (Debit):</Text>
               <Text style={styles.totalAmount}>
                 ₹ {calculateTotalExpense()}
