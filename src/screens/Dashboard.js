@@ -23,7 +23,6 @@ import IncomeComponent from '../components/IncomeComponent';
 import ExpenseComponent from '../components/ExpenseComponent';
 import MonthlyReport from '../components/MonthlyReport';
 import YearlyReport from '../components/YearlyReport';
-import MonthlyHeader from '../components/MonthlyHeader';
 import LinearGradient from 'react-native-linear-gradient';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import {Platform, PixelRatio} from 'react-native';

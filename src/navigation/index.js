@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useUser} from '../components/UserContext';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useUser } from '../components/UserContext';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
@@ -21,15 +21,15 @@ import TotalDetailsScreen from '../screens/TotalDetailsScreen';
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
-  const {user, isLoading} = useUser();
+  const { user, isLoading } = useUser();
 
   // Back button handler to prevent going back to SignIn screen
   useEffect(() => {
     const backAction = () => {
       if (user) {
         Alert.alert('Confirm Exit', 'Are you sure you want to exit the app?', [
-          {text: 'Cancel', onPress: () => null, style: 'cancel'},
-          {text: 'YES', onPress: () => BackHandler.exitApp()},
+          { text: 'Cancel', onPress: () => null, style: 'cancel' },
+          { text: 'YES', onPress: () => BackHandler.exitApp() },
         ]);
         return true;
       } else {
@@ -56,7 +56,7 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
         initialRouteName={user ? 'AppDrawer' : 'SignIn'}>
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -80,3 +80,4 @@ const styles = StyleSheet.create({
 });
 
 export default RootNavigator;
+

@@ -19,6 +19,8 @@ import MonthPicker from 'react-native-month-year-picker';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TextInput} from 'react-native-gesture-handler';
+import {BarChart, PieChart} from 'react-native-chart-kit';
+import ChartModal from './ChartModal';
 
 const {width, height} = Dimensions.get('window');
 
@@ -33,6 +35,7 @@ const MonthlyReport = ({userId}) => {
   const [userName, setUserName] = useState('User');
   const [searchQuery, setSearchQuery] = useState('');
   const [maxDate, setMaxDate] = useState(new Date());
+  const [chartmodalVisible, setChartModalVisible] = useState(false);
   const month = date.getMonth();
   const year = date.getFullYear();
   useEffect(() => {
@@ -385,6 +388,23 @@ const MonthlyReport = ({userId}) => {
     }
   };
 
+  const pieChartData = [
+    {
+      name: 'Income',
+      population: parseFloat(totalIncome),
+      color: '#28a745',
+      legendFontColor: '#000',
+      legendFontSize: 15,
+    },
+    {
+      name: 'Expense',
+      population: parseFloat(totalExpense),
+      color: '#dc3545',
+      legendFontColor: '#000',
+      legendFontSize: 15,
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <LinearGradient colors={['#00796b', '#20b2aa']} style={styles.header}>
@@ -412,14 +432,42 @@ const MonthlyReport = ({userId}) => {
         />
       )}
 
-      <View style={styles.searchContainer}>
-        <Icon name="search" size={20} color="#777" style={styles.searchIcon} />
-        <TextInput
-          style={styles.searchBar}
-          placeholder="Search by description or amount"
-          placeholderTextColor="#777"
-          value={searchQuery}
-          onChangeText={handleSearch}
+      <View style={styles.parentContainer}>
+        {/* Search Bar */}
+        <View style={styles.searchContainer}>
+          <Icon
+            name="search"
+            size={20}
+            color="#777"
+            style={styles.searchIcon}
+          />
+          <TextInput
+            style={styles.searchBar}
+            placeholder="Search by description or amount"
+            placeholderTextColor="#777"
+            value={searchQuery}
+            onChangeText={handleSearch}
+          />
+        </View>
+
+        {/* Chart Icon to Open Modal */}
+        <View style={styles.chartIconContainer}>
+          <TouchableOpacity onPress={() => setChartModalVisible(true)}>
+            <Icon
+              name="pie-chart"
+              size={25}
+              color="#00796b"
+              style={styles.chartIcon}
+            />
+          </TouchableOpacity>
+        </View>
+
+        {/* Modal for Pie Chart */}
+        <ChartModal
+          chartmodalVisible={chartmodalVisible}
+          setChartModalVisible={setChartModalVisible}
+          pieChartData={pieChartData}
+          formattedMonthYear={formattedMonthYear}
         />
       </View>
 
@@ -595,25 +643,37 @@ const styles = StyleSheet.create({
     fontSize: width * 0.06,
     fontWeight: 'bold',
   },
-  searchContainer: {
+  parentContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 5,
+    justifyContent: 'space-between',
+    paddingHorizontal: width * 0.0,
     marginBottom: height * 0.02,
-    borderRadius: width * 0.03,
-    backgroundColor: '#e4f0ef',
+  },
+  searchContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#E0F2F1',
     borderWidth: 1,
     borderColor: '#00796b',
+    borderRadius: width * 0.02,
+    paddingHorizontal: width * 0.05,
+    paddingVertical: height * 0.005,
   },
   searchIcon: {
-    marginLeft: 10, // Adjust positioning
+    marginRight: width * 0.03,
   },
   searchBar: {
     flex: 1,
-    height: 40,
-    paddingLeft: 5,
-    fontSize: 16,
-    borderRadius: 8,
+    fontSize: width * 0.04,
+    color: '#333',
+  },
+  chartIconContainer: {
+    marginLeft: width * 0.0,
+  },
+  chartIcon: {
+    padding: width * 0.03,
   },
   noResults: {
     textAlign: 'center',
@@ -712,6 +772,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
   },
+  chart: {
+    borderRadius: 16,
+  },
   modalOverlay: {
     position: 'absolute',
     top: 0,
@@ -732,6 +795,18 @@ const styles = StyleSheet.create({
     width: '80%',
     height: '80%',
     resizeMode: 'contain',
+  },
+  chartModalCloseButton: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+  },
+  chartTitle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10, // Adds spacing between title and chart
+    textAlign: 'center', // Centers the title
   },
   closeButton: {
     position: 'absolute',
